@@ -33,7 +33,7 @@ export const response = {
         gust: 7.04,
       },
       visibility: 10000,
-      pop: 0,
+      pop: 0.34,
       sys: {
         pod: "d",
       },
