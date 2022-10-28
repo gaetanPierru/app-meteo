@@ -7,7 +7,9 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: window
+    width: window,
+    marginTop: 10,
+    marginBottom: 10
   },
   nextDay: {
     color: "blue",
@@ -23,6 +25,6 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignContent: "space-between",
-    width: window
+    width: window,
   }
 });

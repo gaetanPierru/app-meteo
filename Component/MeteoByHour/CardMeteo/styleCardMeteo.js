@@ -18,5 +18,13 @@ export const styles = StyleSheet.create({
     text : {
         color: "white",
         fontWeight: "bold"
+    }, 
+    current : {
+      backgroundColor: "blue",
+      textAlign: "center",
+      borderColor: "black",
+      borderWidth: 1,
+      borderRadius: 50,
+      alignItems: "center"
     }
 });

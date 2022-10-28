@@ -1,74 +1,66 @@
-import React, { useEffect, useState } from "react";
 import { View, Text, Pressable, Image } from "react-native";
-import { response } from "../../ex";
 import * as Location from "expo-location";
+const dayjs = require("dayjs");
 import { styles } from "./styleMeteo";
 
-export default function Meteo() {
-  const [meteo, setMeteo] = useState(response);
-
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission d'acces a la localisation refuses");
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-
-    let text = "Waiting..";
-    if (location) {
-      text = JSON.stringify(location);
-      getMeteo()
-      console.log(text);
-    }
-
-  }, []);
-
-
-  async function getMeteo() {
-    console.log(location);
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location.coords.latitude}&lon=${location.coords.longitude}&lang=FR&APPID=0d6166ddad3768c332e4a2f72242e6ab`)
-    const mete = await res.json()
-    setMeteo(mete)
-    console.log(mete.list[0].rain)  
-  }
-
-
-
+export default function Meteo({ meteo, getMeteo, current }) {
   return (
-    <View>
-      <View style={styles.current}>
-        <Text style={styles.center}>Meteo du jour à</Text>
-        <Text style={styles.center}>{meteo.city.name}</Text>
-        <View style={styles.center}>
-          <Pressable style={styles.button} onPress={getMeteo}>
-            <Text style={styles.text}> • Mettre a jour</Text>
-          </Pressable>
+    <View style={styles.current}>
+      <Text style={styles.center}>Meteo du jour à</Text>
+      <Text style={styles.center}>📍 {meteo.city.name}</Text>
+      <View style={styles.center}>
+        <Pressable
+          style={styles.button}
+          onPress={async () =>
+            await getMeteo(await Location.getCurrentPositionAsync({}))
+          }
+        >
+          <Text style={styles.text}> • Mettre a jour</Text>
+        </Pressable>
+      </View>
+      <View style={styles.container}>
+        <Image
+          style={styles.tinyLogo}
+          source={{
+            uri: `http://openweathermap.org/img/wn/${meteo.list[current].weather[0].icon}@4x.png`,
+          }}
+        />
+      </View>
+
+      <Text style={styles.temp}>
+        {Math.round(meteo.list[current].main.temp)}°
+      </Text>
+      <Text style={styles.state}>{meteo.list[current].weather[0].main}</Text>
+      <Text style={styles.center}>
+        {dayjs(meteo.list[current].dt_txt.split(" ")[0]).format("dddd D MMMM")}
+      </Text>
+
+      <View style={styles.description}>
+        <View style={styles.span}>
+          <Text>🍃</Text>
+          <Text>
+            {Math.round(meteo.list[current].wind.speed / 1000 / (1 / 3600))}{" "}
+            km/h
+          </Text>
+          <Text>wind</Text>
         </View>
-        <View style={styles.container}>
-          <Image
-            style={styles.tinyLogo}
-            source={{
-              uri: `http://openweathermap.org/img/wn/${meteo.list[0].weather[0].icon}@2x.png`,
-            }} />
+        <View style={styles.span}>
+          <Text>💧</Text>
+          <Text> {meteo.list[current].main.humidity} %</Text>
+          <Text>humidity</Text>
         </View>
 
-        <Text style={styles.center}>{meteo.list[0].main.temp}°</Text>
-        <Text style={styles.center}>{meteo.list[0].weather[0].main}</Text>
-        <Text style={styles.center}>{meteo.list[0].dt_txt}</Text>
-
-
-        <View style={styles.description}>
-          <Text>wind {Math.round((meteo.list[0].wind.speed / 1000) / (1 / 3600))} km/h</Text>
-          <Text>humidity {meteo.list[0].main.humidity} %</Text>
-          <Text>rain chance {meteo.list[0].rain ? meteo.list[0].rain["3h"] * 100 : 0}%</Text>
+        <View style={styles.span}>
+          <Text>🌧️</Text>
+          <Text>
+            {meteo.list[current].rain
+              ? Math.floor(meteo.list[current].rain["3h"] * 100) > 100
+                ? 100
+                : Math.floor(meteo.list[current].rain["3h"] * 100)
+              : 0}
+            %
+          </Text>
+          <Text>rain chance </Text>
         </View>
       </View>
     </View>

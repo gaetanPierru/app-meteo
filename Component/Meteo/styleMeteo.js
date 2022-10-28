@@ -5,13 +5,15 @@ const height = Dimensions.get('window').height
 export const styles = StyleSheet.create({
   tinyLogo: {
     width: window * 0.75,
-    height: height * 0.5 
+    height: height * 0.30 
   },
   description: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     width: window,
+    paddingHorizontal: 20,
+    marginTop: 20
   },
   current: {
     marginTop: 30,
@@ -37,6 +39,7 @@ export const styles = StyleSheet.create({
   container : {
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 10
   },
   text : {
     color: "gray",
@@ -46,5 +49,22 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
+  },
+  a: {
+    color: "white"
+  },
+  temp: {
+    textAlign: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: window / 4,
+    fontWeight: "bold",
+  }, 
+  state: {
+    textAlign: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 30,
+    fontWeight: "bold"
   }
 });
