@@ -53,11 +53,7 @@ export default function Meteo({ meteo, getMeteo, current }) {
         <View style={styles.span}>
           <Text>🌧️</Text>
           <Text>
-            {meteo.list[current].rain
-              ? Math.floor(meteo.list[current].rain["3h"] * 100) > 100
-                ? 100
-                : Math.floor(meteo.list[current].rain["3h"] * 100)
-              : 0}
+            {meteo.list[current].pop * 100}
             %
           </Text>
           <Text>rain chance </Text>

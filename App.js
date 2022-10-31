@@ -1,10 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import Meteo from "./Component/Meteo/Meteo";
 import MeteoByHour from "./Component/MeteoByHour/MeteoByHour";
 import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import MeteoWeek from "./Component/MeteoWeek/MeteoWeek";
+import LoaderPikachu from "./Component/Loader Pikachu/LoaderPikachu"
+const window = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 export default function App() {
   const [meteo, setMeteo] = useState(null);
@@ -39,15 +42,13 @@ export default function App() {
 
   if (loading) {
     return (
-      <View>
-        <Text style={styles.a}>chargement</Text>
-      </View>
+      <LoaderPikachu />
     );
   }
   if (modal) {
-    return(
+    return (
       <View>
-        <MeteoWeek setModal={setModal} meteo={meteo}/>
+        <MeteoWeek setModal={setModal} meteo={meteo} />
       </View>
     )
   }
@@ -56,7 +57,7 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Meteo meteo={meteo} getMeteo={getMeteo} current={current} />
-      <MeteoByHour meteo={meteo} setCurrent={setCurrent} current={current} setModal={setModal}/>
+      <MeteoByHour meteo={meteo} setCurrent={setCurrent} current={current} setModal={setModal} />
     </View>
   );
 }

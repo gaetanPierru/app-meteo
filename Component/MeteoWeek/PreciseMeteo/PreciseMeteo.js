@@ -54,9 +54,7 @@ export default function PreciseMeteo({ setModal, meteo }) {
         <View style={styles.span}>
           <Text>🌧️</Text>
           <Text>
-            {meteo.rain
-              ? meteo.rain["3h"] * 100 > 100? 100: meteo.rain["3h"] * 100
-              : 0}
+            {meteo.pop * 100}
             %
           </Text>
           <Text>rain chance </Text>

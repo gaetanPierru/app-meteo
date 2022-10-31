@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, Pressable } from "react-native";
+import LoaderPikachu from "../Loader Pikachu/LoaderPikachu";
 import CardMeteo from "./CardMeteo/CardMeteo";
 import PreciseMeteo from "./PreciseMeteo/PreciseMeteo";
 import { styles } from "./styleMeteoWeek";
@@ -28,10 +29,10 @@ export default function MeteoWeek({ setModal, meteo }) {
     setLoading(false);
   }, []);
 
-  if (loading) return <Text>Loading</Text>;
+  if (loading) return <LoaderPikachu />;
   // console.log(distinc.length);
   // console.log(tab);
-  console.log(current);
+  // console.log(current);
   return (
     <View style={styles.container}>
       <View style={styles.current}>
