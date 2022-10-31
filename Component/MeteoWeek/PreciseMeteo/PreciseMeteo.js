@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import { styles } from "./stylePreciseMeteo";
 const dayjs = require('dayjs')
+require("dayjs/locale/fr");
 
 export default function PreciseMeteo({ setModal, meteo }) {
-  console.log(meteo);
   return (
     <View style={styles.container}>
       <View style={styles.head}>
@@ -26,7 +25,7 @@ export default function PreciseMeteo({ setModal, meteo }) {
           }}
         />
         <View>
-          <Text>{dayjs(meteo.dt_txt.split(" ")[0]).format('dddd D MMMM')}</Text>
+          <Text>{dayjs(meteo.dt_txt.split(" ")[0]).locale("fr").format('dddd D MMMM')}</Text>
           <View style={styles.temp}>
             <Text style={styles.tempM}>{Math.round(meteo.main.temp_max)}</Text>
             <Text style={styles.tempMin}>

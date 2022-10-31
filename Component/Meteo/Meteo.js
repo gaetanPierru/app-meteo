@@ -1,7 +1,8 @@
 import { View, Text, Pressable, Image } from "react-native";
 import * as Location from "expo-location";
-const dayjs = require("dayjs");
 import { styles } from "./styleMeteo";
+const dayjs = require("dayjs");
+require("dayjs/locale/fr");
 
 export default function Meteo({ meteo, getMeteo, current }) {
   return (
@@ -32,7 +33,7 @@ export default function Meteo({ meteo, getMeteo, current }) {
       </Text>
       <Text style={styles.state}>{meteo.list[current].weather[0].main}</Text>
       <Text style={styles.center}>
-        {dayjs(meteo.list[current].dt_txt.split(" ")[0]).format("dddd D MMMM")}
+        {dayjs(meteo.list[current].dt_txt.split(" ")[0]).locale("fr").format("dddd D MMMM")}
       </Text>
 
       <View style={styles.description}>

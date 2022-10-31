@@ -1,13 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Meteo from "./Component/Meteo/Meteo";
 import MeteoByHour from "./Component/MeteoByHour/MeteoByHour";
 import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import MeteoWeek from "./Component/MeteoWeek/MeteoWeek";
 import LoaderPikachu from "./Component/Loader Pikachu/LoaderPikachu"
-const window = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
 
 export default function App() {
   const [meteo, setMeteo] = useState(null);

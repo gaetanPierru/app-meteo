@@ -7,7 +7,6 @@ import { styles } from "./styleMeteoWeek";
 
 export default function MeteoWeek({ setModal, meteo }) {
   let tab = [];
-  // console.log(meteo)
   const [distinc, setDistinc] = useState([]);
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
@@ -15,7 +14,6 @@ export default function MeteoWeek({ setModal, meteo }) {
     let a = [];
 
     for (var i = 0; i < meteo.list.length; i++) {
-      //  console.log(meteo.list[i].dt_txt.split(" ")[1]);
       if (tab.includes(meteo.list[i].dt_txt.split(" ")[0])) {
         // console.log("deja")
       } else {
@@ -30,9 +28,6 @@ export default function MeteoWeek({ setModal, meteo }) {
   }, []);
 
   if (loading) return <LoaderPikachu />;
-  // console.log(distinc.length);
-  // console.log(tab);
-  // console.log(current);
   return (
     <View style={styles.container}>
       <View style={styles.current}>
